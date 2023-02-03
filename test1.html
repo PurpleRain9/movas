@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>  
+<body>
+<button onclick="Show()">ADD</button>
+<button onclick="Hide()">REMOVE</button>
+<p id="Myid1">Text 1</p>
+<p id="Myid2" style="display:none;">Text 2</p>
+<p id="Myid3" style="display:none;">Text 3</p>
+<p id="Myid4" style="display:none;">Text 4</p>
+<p id="Myid5" style="display:none;">Text 5</p>
+<script>
+No=1;
+
+function Show(Myid){
+switch(No) {
+  case 1:
+    Myid="Myid2";
+    break;
+  case 2:
+    Myid="Myid3";
+    break;
+  case 3:
+    Myid="Myid4";
+    break;
+  case 4:
+    Myid="Myid5";
+}
+
+  var x = document.getElementById(Myid);
+  x.style.display = "block";
+  if (No<6){  No++;  }
+}
+
+function Hide(Myid){
+switch(No) {
+  case 5:
+    Myid="Myid5";
+    break;
+  case 4:
+    Myid="Myid4";
+    break;
+  case 3:
+    Myid="Myid3";
+    break;
+  case 2:
+    Myid="Myid2";
+}
+
+  var x = document.getElementById(Myid);
+  x.style.display = "none";
+  if (No>1){  No--;  }
+}
+
+</script>
+</body>
+  
+</html>

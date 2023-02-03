@@ -1,0 +1,1 @@
+<p>Dear {{$data['username']}},Your Resignation Letter had been approved.</p>
