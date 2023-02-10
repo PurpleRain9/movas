@@ -170,6 +170,7 @@ class SaveDraftController extends Controller
                 $evidence=NULL;
                 $underTaking=NULL;
                 $formcfile = NULL;
+
                 if($request->file('passport')){
                    $passport=$request->file('passport');
                    $passport= $this->storeAttachments($passport);
@@ -202,8 +203,9 @@ class SaveDraftController extends Controller
                     $formcfile = $request->file('formcfile');
                     $formcfile = $this->storeAttachments($formcfile);
                  }
+
+                //  dd($request->file('formcfile'));
                  
-                // dd($formcfile);
                 $visa_detail = VisaApplicationDetail::Create([
 
                     'profile_id' => Auth::user()->profile->id,  
@@ -273,23 +275,40 @@ class SaveDraftController extends Controller
                 $underTaking=$request->file('underTaking');
                 $underTaking= $this->storeAttachments($underTaking);
             }else{
-                $underTaking=$visa_detail->applicant_form_attach;
-            }
             
+                $underTaking=$visa_detail->applicant_form_attach;
+                // dd($underTaking);
+            }
 
-            if ($request->hasfile('formcfile')) {
-                if(!is_null($visa_detail->formcfile_attch)){
-                    $filePath9 = public_path() . $visa_detail->formcfile_attch;
-                    if (File::exists($filePath9)) {
+            if($request->hasfile('formcfile')){
+                if($visa_detail->formcfile_attch){
+                    $filePath9 = public_path().$visa_detail->formcfile_attch;
+                    // dd('notnull');
+                    if(File::exists($filePath9)){
                         File::delete($filePath9);
                     }
-                    $formcfile = $request->file('formcfile');
-                    $formcfile = $this->storeAttachments($formcfile);
                 }
-            }else{
+                $formcfile = $request->file('formcfile');
+                $formcfile = $this->storeAttachments($formcfile);
+            }else {
                 $formcfile = $visa_detail->formcfile_attch;
-            }
-
+            } 
+            
+            // if ($request->hasfile('formcfile')) {
+            //     if(!is_null($visa_detail->formcfile_attch)){
+            //         $filePath9 = public_path() . $visa_detail->formcfile_attch;
+            //         dd($filePath9);
+            //         if (File::exists($filePath9)) {
+            //             File::delete($filePath9);
+            //         }
+                    
+            //         $formcfile = $request->file('formcfile');
+            //         $formcfile = $this->storeAttachments($formcfile);
+            //     }
+            // }else{
+            //     $formcfile = $visa_detail->formcfile_attch;
+            // }
+            // dd($request->formcfile);
             if($request->person_type_id == 1 || $request->person_type_id == 3){
 
                 if($request->hasfile('labourCard')){

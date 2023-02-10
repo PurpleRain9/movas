@@ -388,28 +388,28 @@ class FormController extends Controller
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 1],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 2) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 2],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 3) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 3],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 4) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 4],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 5) {
             $admins = [];

@@ -260,7 +260,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-6 {{ $applicant->formcfile_attch == null ? 'd-none': '' }}">
+					<div class="col-6  {{ $applicant->formcfile_attch == null ?  'd-none': ' ' }}">
 						<div class="row mt-3">
 							<div class="col-md-9">
 								<label> <span class="mm">FormC Address</span><span class="eng">FormC Address</span></label>
@@ -268,7 +268,7 @@
 							<div class="col-md-3">
 								<a href="{{ URL::to('/public'.$applicant->formcfile_attch) }}" class="btn btn-primary ">View</a>
 							</div>
-						</div>
+						</div>	
 					</div>
 					<div class="col-6 {{$applicant->applicant_form_attach == null ? 'd-none':''}}">
 						<div class="row mt-3">

@@ -82,28 +82,28 @@ class ApproveVisaApplicationController extends Controller
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 1],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 2) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 2],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 3) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 3],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 4) {
             $admins = Admin::where([
                             ['id','!=',1],
                             ['rank_id', '<', 6],
                             ['rank_id', '>', 4],
-                        ])->get();
+                        ])->orderBy('rank_id', 'asc')->get();
         }
         if ($rr == 5) {
             $admins = [];
@@ -328,8 +328,18 @@ class ApproveVisaApplicationController extends Controller
             $visa_details = VisaApplicationDetail::where('visa_application_head_id',$request->visa_application_head_id)->get();
             
             foreach ($visa_details as $visa_detail) {
+                
                 // update status 0 in item_attaches
                 if($request->has('detail'.$visa_detail->id)){
+                    $file3=public_path().$visa_detail->passport_attach;
+                    $file4=public_path().$visa_detail->mic_approved_letter_attach;
+                    $file5=public_path().$visa_detail->labour_card_attach;
+                    $file6=public_path().$visa_detail->extract_form_attach;
+                    $file7=public_path().$visa_detail->technician_passport_attach;
+                    $file8=public_path().$visa_detail->evidence_attach;
+                    $file9=public_path().$visa_detail->applicant_form_attach;
+                    $file10=public_path().$visa_detail->formcfile_attch;
+                    File::delete($file3,$file4,$file5,$file6,$file7,$file8,$file9,$file10);
                     $visa_detail->update([
                         'reject_status' => 0,
                         'passport_attach' => null,
@@ -339,15 +349,10 @@ class ApproveVisaApplicationController extends Controller
                         'technician_passport_attach'=> null,
                         'evidence_attach'=> null,
                         'applicant_form_attach' => null, 
+                        'formcfile_attch' => null,
                     ]);
-                    $file3=public_path().$visa_detail->passport_attach;
-                    $file4=public_path().$visa_detail->mic_approved_letter_attach;
-                    $file5=public_path().$visa_detail->labour_card_attach;
-                    $file6=public_path().$visa_detail->extract_form_attach;
-                    $file7=public_path().$visa_detail->technician_passport_attach;
-                    $file8=public_path().$visa_detail->evidence_attach;
-                    $file9=public_path().$visa_detail->applicant_form_attach;
-                    File::delete($file3,$file4,$file5,$file6,$file7,$file8,$file9);
+                    
+                    
                 }
             }
             $visa_head->update(['Status'=>2]);

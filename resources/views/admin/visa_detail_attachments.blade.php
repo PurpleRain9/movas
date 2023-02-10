@@ -27,6 +27,7 @@
 					<td class="col-md-1">{{$i++}}</td>
 					<td>Passport</td>
 					<td class="col-md-1"><a href="{{$visa_detail->passport_attach}}" class="btn btn-outline-primary">View File</a></td>
+					<td class="col-md-1"><a href="{{asset('public'.$visa_detail->passport_attach)}}" class="btn btn-outline-primary">View File</a></td>
 				</tr>
 			@endif
 			@if($visa_detail->	formcfile_attch !=null || $visa_detail->formcfile_attch != '')
