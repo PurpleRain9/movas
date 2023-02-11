@@ -14,6 +14,7 @@ use App\Models\Dependant;
 use App\Models\Director;
 use App\Models\Remark;
 use App\Models\ForeignTechician;
+use App\Models\PermitType;
 use App\Models\Profile;
 use App\Models\RejectHistory;
 use App\Models\User;
@@ -417,7 +418,8 @@ class ApproveVisaApplicationController extends Controller
     public function profile(){
 
         $profile=Profile::orderBy('created_at','desc')->get();
-        return view('admin.profileList',compact('profile'));
+        $permitype = PermitType::all();
+        return view('admin.profileList',compact('profile', 'permitype'));
     }
 
     public function profileShow($id){

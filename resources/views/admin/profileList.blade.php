@@ -23,28 +23,48 @@
             margin-left: 1rem;
             margin-top: 0.1rem;
         }
+
+        #profilelistTable_filter{
+            display: none;
+        }
+
+        #profileSearch{
+
+            margin: 0;
+            z-index: 999;
+        }
     </style>
     
 
     <div class="d-xl-flex row align-items-start" style="border-bottom: 1px solid lightblue;">
         
         
-        <div class="col-md-6">
-          <label>Select</label>
-          <select id="test-select" class="form-control">
-            <option value="">Select</option>
-            @foreach ( $profile as $pmt)
-              <option value="{{ $pmt->permit_type->PermitTypeNameMM }}">{{ $pmt->permit_type->PermitTypeNameMM }}</option>
-            @endforeach
-          </select>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-6">
+                <label style="font-weight:bold;">Select</label>
+                <select id="test-select" class="form-control">
+                    <option value="">Select</option>
+                    @foreach ( $permitype as $pmt)
+                        <option value="{{ $pmt->PermitTypeNameMM }}">{{ $pmt->PermitTypeNameMM }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label style="font-weight:bold;">Search</label>
+                <input type="text" class="form-control" id="profileSearch" name="profileSearch" placeholder="search..">
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 text-end">
+        <div class="col-md-3 text-end">
           <h3 class="text-dark mb-0" style="margin-top:3rem;font-weight:bold;"> Profile List </h3>
         </div>
     </div>
     <div class="row mt-3">
         <div class="col-md-12">
+            
             <table class="table table-hover table-bordered table-responsive" id="profilelistTable">
+                
                 
                 <thead class="bg-primary text-white">
                     <th>
@@ -184,11 +204,17 @@
             oTable = $('#profilelistTable').dataTable();
 
             $('#test-select').change( function() { 
-                  oTable.fnFilter( $(this).val() );
-                  var label = $('#test_filter').children('label');
-                  var inputValue = label.children('input').search();
-                  inputValue = ' ';
+                oTable.fnFilter( $(this).val() );
+                var label = $('#profilelistTable_filter').children('label');
+                var input = label.children('input');
+                var inputValue = input.val();
+                // console.log(inputValue);
+                inputValue.length = "";
             });
+
+            $('#profileSearch').keyup(function(){
+                oTable.fnFilter($(this).val());
+            })
 
 
 
