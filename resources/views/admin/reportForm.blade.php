@@ -223,6 +223,7 @@
                         <th rowspan="2" style="line-height: 4;">Stay (From)</th>
                         <th rowspan="2" style="line-height: 4;">Stay (To)</th>
                         <th rowspan="2" style="line-height: 2;">Applicant <br> Type</th>
+                        <th rowspan="2" style="line-height: 2;">Applicant <br> Rank</th>
                         <th rowspan="2" style="line-height: 4;">Relationship</th>
                         <th rowspan="2" style="line-height: 4;">Sector</th>
                         <th rowspan="2" style="line-height: 4;">Business Type</th>
@@ -273,6 +274,17 @@
                                
 
                                 <td style="text-align: center;">{{ $r->PersonTypeNameMM }}</td>
+                                <td style="text-align:center;">
+                                    @if ($r->PersonTypeNameMM == 'ကျွမ်းကျင်လုပ်သား')
+                                        @if ($r->Rank)
+                                            {{ $r->Rank }}
+                                        @else
+                                            <p>Rank not filled</p>
+                                        @endif
+                                    @else
+                                        {{ $r->PersonTypeNameMM }}
+                                    @endif
+                                </td>
                                 @if($r->Remark == null)
                                 <td style="text-align: center;"> {{ $r->RelationShipNameMM }}</td>
                                 @else

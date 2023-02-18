@@ -115,7 +115,7 @@ class ProfileController extends Controller
                 "Status"=>0,
             ]);
 
-            Auth::user()->update(['Status'=>1]);
+            Auth::user()->update(['Status'=>1 , 'ApproveDate' => $profile->updated_at]);
 
             Toastr::success('Profile submitted. Please wait for admin approval!');
 

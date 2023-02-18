@@ -244,7 +244,7 @@
 					<div class="col">
 						<fieldset class="form-group">
 							<label for="pxq11"><span class="mm">ခွင့်ပြုမိန့်</span><span class="eng">MIC Permit</span></label>
-    					    <input type="file" class="form-control" name="AttachPermit" id="pxq11" onchange="validateFileSize(this);">
+    					    <input type="file" class="form-control" name="AttachPermit" id="pxq11" accept="application/pdf" onchange="validateFileSize(this);">
 							@error('AttachPermit')
 								<span class="text-danger"><small>* {{ $message }}</small></span>
 							@enderror
@@ -253,7 +253,7 @@
 					<div class="col">
 						<fieldset class="form-group">
 							<label for="pxq12"><span class="mm">Proposal Employee List as per Proposal</span><span class="eng">Proposal Employee List as per Proposal</span></label>
-    						<input type="file" class="form-control" name="AttachProposal" id="pxq12" onchange="validateFileSize(this);">
+    						<input type="file" class="form-control" name="AttachProposal" id="pxq12" accept="application/pdf" onchange="validateFileSize(this);">
 							@error('AttachProposal')
 								<span class="text-danger"><small>* {{ $message }}</small></span>
 							@enderror
@@ -264,7 +264,7 @@
 					<div class="col">
 						<fieldset class="form-group">
 							<label for="pxq13"><span class="mm">Appointed Employee List (Local & Foreign)</span><span class="eng">Appointed Employee List (Local & Foreign)</span></label>
-    						<input type="file" class="form-control" name="AttachAppointed" id="pxq13" onchange="validateFileSize(this);">
+    						<input type="file" class="form-control" name="AttachAppointed" id="pxq13" accept="application/pdf" onchange="validateFileSize(this);">
 							@error('AttachAppointed')
 								<span class="text-danger"><small>* {{ $message }}</small></span>
 							@enderror

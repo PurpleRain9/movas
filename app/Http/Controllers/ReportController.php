@@ -97,6 +97,7 @@ class ReportController extends Controller
                 'StayAllowDateFrom' => $list->StayExpireDate,
                 'StayAllowDateTo' => $toDate,
                 'person_types' => $list->PersonTypeNameMM,
+                'Rank' => $list->PersonTypeNameMM == 'ကျွမ်းကျင်လုပ်သား' ? $list->Rank : $list->PersonTypeNameMM,
                 'relation_ships' => $list->RelationShipNameMM,
                 'Sectore' => $list->SectorNameMM,
                 'BusinessType' => $list->BusinessType,

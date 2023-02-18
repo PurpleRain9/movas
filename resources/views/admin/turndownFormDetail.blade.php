@@ -415,6 +415,15 @@
                                     <td>
                                         {{$vd->PersonName}} <br><br>@if (!is_null($vd->person_type))
                                             {{$vd->person_type->PersonTypeName}}
+                                            @if ($vd->person_type->id == 3)
+                                                <div class="mt-2">
+                                                    @if($vd->Rank)
+                                                        ({{ $vd->Rank }})
+                                                    @else
+                                                        (.....)
+                                                    @endif
+                                                </div>
+                                            @endif
                                         @endif
                                         
                                         @if ($vd->person_type_id == 4)
@@ -856,6 +865,15 @@
                                     {{ $vd->PersonName }} <br><br>
                                     @if (!is_null($vd->person_type))
                                         {{ $vd->person_type->PersonTypeName }}
+                                        @if ($vd->person_type->id == 3)
+											<div class="mt-2">
+												@if($vd->Rank)
+													({{ $vd->Rank }})
+												@else
+													(.....)
+												@endif
+											</div>
+										@endif
                                     @endif
 
                                     @if ($vd->person_type_id == 4)
@@ -863,10 +881,8 @@
                                         @if (!is_null($vd->relation_ship_id))
                                             {{ $vd->relation_ship->RelationShipName }} of
                                         @endif
-                                        @if (!is_null($vd->Remark))
-                                            {{ $vd->Remark }}
-                                        @endif
                                     @endif
+                                    
                                 </td>
                                 <td>{{ $vd->nationality->NationalityName }}</td>
                                 <td>{{ $vd->PassportNo }}</td>

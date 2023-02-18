@@ -35,7 +35,7 @@
         }
     </style>
     
-
+   
     <div class="d-xl-flex row align-items-start" style="border-bottom: 1px solid lightblue;">
         
         
@@ -85,6 +85,9 @@
                     <th>
                         Profile Status
                     </th>
+                    <td>
+                        Date
+                    </td>
                     <th>
                         Actions
                     </th>
@@ -151,8 +154,20 @@
                                 @else
                                     <span class="badge badge-success"> Approve</span>
                                 @endif
-                            <td><a class="btn btn-sm rounded btn-primary button"
-                                    href="{{ route('profileShow', $result->id) }}">Show</a></td>
+                            </td>
+                            <td>
+                                @if ($result->Status == 1)
+                                    <p>{{ $result->ApproveDate}}</p>
+                                @elseif ($result->Status == 2)
+                                    <p>{{ $result->updated_at->format('Y-m-d') }}</p>
+                                @else
+                                    <p>{{ $result->created_at->format('Y-m-d') }}</p>
+                                @endif
+                            </td>
+                            <td>
+                                <a class="btn btn-sm rounded btn-primary button"
+                                href="{{ route('profileShow', $result->id) }}">Show</a>
+                            </td>
 
                         </tr>
                     @endforeach
@@ -187,7 +202,7 @@
                             return 'Profilelist' + d;
                         },
                         exportOptions: {
-                            columns: [0,1,2,3,4,5]
+                            columns: [0,1,2,3,4,5,6]
                         }
                     },
                 ],

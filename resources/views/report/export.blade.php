@@ -52,6 +52,7 @@
                     <th rowspan="2">Stay (From)</th>
                     <th rowspan="2">Stay (To)</th>
                     <th rowspan="2">Applicant Type</th>
+                    <th rowspan="2">Applicant Rank</th>
                     <th rowspan="2">Relationship</th>
                     <th rowspan="2">Sector</th>
                     <th rowspan="2" style="width: 500px;">Business Type</th>

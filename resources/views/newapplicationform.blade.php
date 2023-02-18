@@ -147,7 +147,7 @@
 						<label ><span class="mm">
 						လျှောက်ထားသူအမျိုးအစား</span><span class="eng">Applicant Type</span></label>
 						<select class="form-control mt-1" name="person_type_id" id="applicantType" onchange="checkApplicantType(this.value);changeAttachmentLabel()" required>
-							<option value="null">Choose</option>
+							<option sel value="null">Choose</option>
 							@foreach($person_types as $pt)
 							<option value="{{$pt->id}}"  @if($isEdit) {{$applicant->person_type_id == $pt->id ? 'selected':''}}  @endif>{{$pt->PersonTypeName}}</option>
 							@endforeach
@@ -464,12 +464,10 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-	
-		console.log(('#applicantType').val());
-
+		
 		$('#applicantType').on('change', function() {
   			// alert( this.value );
-			  if (this.value == null) {
+			if (this.value == 'null') {
 				$('#rankInputDiv').hide(500);
 			}
 			if (this.value == 1) {
@@ -481,10 +479,10 @@
 			if(this.value == 4){
 				$('#rankInputDiv').hide(500);
 			}
-		});
+		}).trigger('change');
 		
 	});
-
+	
 	$("#myForm").submit(function () {
 		$('#applySubmit').hide();
 		$('#cancel').hide();

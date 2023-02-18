@@ -311,6 +311,15 @@ p{line-height: 200%; font-size: 17px;}
 								<td>
 									{{$vd->PersonName}} <br><br>@if (!is_null($vd->person_type))
 										{{$vd->person_type->PersonTypeName}}
+										@if ($vd->person_type->id == 3)
+											<div class="mt-2">
+												@if($vd->Rank)
+													({{ $vd->Rank }})
+												@else
+													(.....)
+												@endif
+											</div>
+										@endif
 									@endif
 									
 									@if ($vd->person_type_id == 4)
