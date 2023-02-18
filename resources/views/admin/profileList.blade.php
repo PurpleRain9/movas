@@ -159,7 +159,7 @@
                                 @if ($result->Status == 1)
                                     <p>{{ $result->ApproveDate}}</p>
                                 @elseif ($result->Status == 2)
-                                    <p>{{ $result->updated_at->format('Y-m-d') }}</p>
+                                    <p>{{ $result->Rejected_date}}</p>
                                 @else
                                     <p>{{ $result->created_at->format('Y-m-d') }}</p>
                                 @endif

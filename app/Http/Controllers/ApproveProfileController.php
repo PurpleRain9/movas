@@ -123,6 +123,7 @@ class ApproveProfileController extends Controller
         $profile->update(['AttachIncreased'=>null]);
         $profile->update(['AttachAppointed'=>null]);
         $profile->update(['Status'=>'2']);
+        $profile->update(['Rejected_date' =>$profile->updated_at]);
 
         // $data = array(
         //             'username' => $profile->user->name,

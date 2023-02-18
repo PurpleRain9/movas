@@ -42,7 +42,7 @@ class Profile extends Model
             'AttachProposal',
             'AttachAppointed',
             'AttachIncreased',
-            'Status','ApproveDate'
+            'Status','ApproveDate',"Rejected_date"
     ];
 
     public function user()

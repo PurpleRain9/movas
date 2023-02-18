@@ -475,6 +475,7 @@
 			}
 			if (this.value == 3) {
 				$('#rankInputDiv').show(500);
+				$("#rank_input").prop('required',true);
 			}
 			if(this.value == 4){
 				$('#rankInputDiv').hide(500);
