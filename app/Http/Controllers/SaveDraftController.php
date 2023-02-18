@@ -217,6 +217,7 @@ class SaveDraftController extends Controller
                     'person_type_id' => $request->person_type_id,
                     'DateOfBirth' => $request->DateOfBirth,
                     'Gender' => $request->Gender,
+                    'Rank' => $request->Rank,
                     'FormC' => $request->FormC,
                     'visa_type_id' => $request->visa_type_id,
                     'stay_type_id' => $request->stay_type_id,
@@ -233,6 +234,8 @@ class SaveDraftController extends Controller
                     'evidence_attach'=> $evidence,
                     'formcfile_attch'=> $formcfile
                 ]);     
+
+                // dd($visa_detail);
             }
 
             // return redirect()->route('applyforunderTakingmNew');
@@ -407,6 +410,7 @@ class SaveDraftController extends Controller
                 'person_type_id' => $request->person_type_id,
                 'DateOfBirth' => $request->DateOfBirth,
                 'Gender' => $request->Gender,
+                'Rank' => $request->Rank,
                 'FormC' => $request->FormC,
                 'visa_type_id' => $request->visa_type_id,
                 'stay_type_id' => $request->stay_type_id,

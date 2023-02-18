@@ -31,6 +31,7 @@ class VisaApplicationDetail extends Model
             'StayExpireDate',
             'person_type_id',
             'DateOfBirth',
+            'Rank',
             'Gender',
             'FormC',
             'visa_type_id',

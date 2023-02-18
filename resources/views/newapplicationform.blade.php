@@ -154,6 +154,12 @@
 						</select>
 					</fieldset>
 				</div>
+				<div class="col-md-3 mt-1" id="rankInputDiv">
+					<div class="form-group">
+						<label for="rank">Rank</label>
+						<input type="text" id="rank_input" name="Rank" @if($isEdit) value="{{$applicant->Rank}}" @endif class="form-control" >
+					</div>
+				</div>
 				<div class="col">
 					<fieldset class="form-group">
 						<label for="dateOfBirth"><span class="mm">မွေးနေ့</span><span class="eng">Date Of Birth</span></label>
@@ -161,7 +167,8 @@
 					</fieldset>
 				</div>
 				<div class="col col-md-3">
-					<fieldset class="form-group">
+					
+					<fieldset class="form-group">	
 						<label ><span class="mm">
 						ကျား၊မ</span><span class="eng">Gender</span></label>
 						<div class="radio">
@@ -455,6 +462,28 @@
 
 
 <script type="text/javascript">
+
+	$(document).ready(function () {
+	
+		console.log(('#applicantType').val());
+
+		$('#applicantType').on('change', function() {
+  			// alert( this.value );
+			  if (this.value == null) {
+				$('#rankInputDiv').hide(500);
+			}
+			if (this.value == 1) {
+				$('#rankInputDiv').hide(500);
+			}
+			if (this.value == 3) {
+				$('#rankInputDiv').show(500);
+			}
+			if(this.value == 4){
+				$('#rankInputDiv').hide(500);
+			}
+		});
+		
+	});
 
 	$("#myForm").submit(function () {
 		$('#applySubmit').hide();
