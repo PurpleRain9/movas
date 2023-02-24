@@ -214,6 +214,7 @@ Route::get('/print/pdf/{id}', [FormController::class, 'showPrintForm'])->name('p
 Route::get('/reportForm',[App\Http\Controllers\AdminController::class,'reportForm'])->name('report.Form');
 
 Route::get('/report/export',[App\Http\Controllers\ReportController::class,'reportExport'])->name('report.export');
+Route::get('/report/exallapplicants', [\App\Http\Controllers\ReportController::class ,'allapplicantExport'])->name('report.allapplicant');
 
 Route::get('/clear-cache', function() {
     \Artisan::call('dump-autoload');
@@ -288,6 +289,8 @@ Route::get('dependants/{dependants_id}/export', [AdminController::class, 'depend
 // Applicant List on Dashboard
 Route::get('/applicantList', [AdminController::class, 'applicantList'])->name('applicantList');
 Route::get('/applicantsExport', [AdminController::class, 'applicantsExport'])->name('applicantsExport');
+// All Applicant List On Dashboard
+Route::get('/all_applicantList',[AdminController::class, 'AllapplicantList'])->name('AllapplicantList');
 
 
 // Approve Modal

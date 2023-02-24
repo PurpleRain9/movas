@@ -420,6 +420,7 @@ p{line-height: 200%; font-size: 17px;}
 							<th>ပြည်ဝင်ခွင့်</th>
 							<th>နေထိုင်ခွင့်</th>
 							<th>အလုပ်သမားကဒ်/<br>သက်တမ်း</th>
+							<th></th>
 						</tr>
 					</thead>
 					
@@ -470,7 +471,14 @@ p{line-height: 200%; font-size: 17px;}
 								<td>
 									<a href="{{ route('visa_detail_attach',$vd->id) }}" class="btn btn-outline-primary" >. . .</a>
 								</td>
+								<td >
+									<tr rowspan="2">
+										<th colspan="1" class="bg-white"></th>
+										<th colspan="9" class="fw-light text-left bg-white">{{ $vd->FormC }}</th>
+									</tr>
+								</td>
 							</tr>
+							
 						@endforeach
 					</tbody>
 
@@ -715,11 +723,9 @@ p{line-height: 200%; font-size: 17px;}
 									</tbody>
 								  </table>
 								</div>
-
 						        <div class="form-group mt-2">
 						            <textarea class="form-control" name="Comment" style="height: 250px;" placeholder="Reject Reasons go here...." id="rejectCommentBox" required ></textarea>
 						          </div>
-						     
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to resubmit ? No applicant has been selected!')">Resubmit</button>

@@ -147,8 +147,23 @@ class SaveDraftController extends Controller
                 return redirect()->route('newapplyform')->with('error',$request->PersonName.'သည်လျှောက်ထားဆဲဖြစ်နေသဖြင့်ထက်မံလျှောက်ထား၍မရပါ။');
             }
         }
-       if( $request->submitButton == 0)
+
+        
+        if( $request->submitButton == 0)
         {
+            if (!is_null($request->PersonName) && !is_null($request->PassportNo)) {
+                $reject = VisaApplicationHead::join('visa_application_details', 'visa_application_details.visa_application_head_id', '=', 'visa_application_heads.id')
+                ->where('visa_application_heads.user_id', auth()->user()->id)
+                ->where('visa_application_details.PersonName',$request->PersonName)
+                ->where('visa_application_details.PassportNo',$request->PassportNo)
+                ->where('visa_application_heads.Status', '=', 2)
+                ->get();
+    
+                if($reject->count() != 0){
+                    // dd('something');
+                    return redirect('newapplyform')->with('error',$request->PersonName. '  သည် နေထိုင်ခွင့်သက်တမ်းတိုးလျှောက်ထားခြင်းအား ခွင့် မပြု၍   ပြန်လည်လျှောက်ထားခွင့် မရနိုင်ပါ။'); 
+                }
+            }
             if (!is_null($request->nationality_id) && !is_null($request->PersonName) && !is_null($request->PassportNo)) {
 
                 if (is_null($request->labour_card_type_id)) {

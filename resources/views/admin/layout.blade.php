@@ -276,6 +276,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ route('AllapplicantList')}}">
+                  <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+                  <span class="menu-title">All Applicant List</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.index')}}">
                   <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                   {{-- <span class="menu-title mm">User Management</span> --}}

@@ -423,6 +423,12 @@ p{line-height: 200%; font-size: 17px;}
 								<td>
 									<a href="{{ route('visa_detail_attach',$vd->id) }}" class="btn btn-outline-primary" >. . .</a>
 								</td>
+								<td >
+									<tr rowspan="2">
+										<th colspan="1" class="bg-white"></th>
+										<th colspan="9" class="fw-light text-left bg-white">{{ $vd->FormC }}</th>
+									</tr>
+								</td>
 							</tr>
 						@endforeach
 					</tbody>

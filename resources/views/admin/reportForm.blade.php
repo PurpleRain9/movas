@@ -17,7 +17,7 @@
         $r_to_date = old('to_date');
         $r_PersonNameSearch = old('PersonNameSearch');
         $r_NationalitySearch = old('NationalitySearch');
-        $r_GenderSearch = old('GenderSearch');
+        $r_GenderSearch = old('GenderSearch');  
         $r_SectorSearch = old('SectorSearch');
         $r_PersonTypeSearch = old('PersonTypeSearch');
         $r_type = old('Type');

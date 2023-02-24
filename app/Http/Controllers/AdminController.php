@@ -448,7 +448,9 @@ class AdminController extends Controller
             $reportlist->where('visa_application_heads.Status', '=', 1);
 	        $reportlist->orderBy('PersonName','asc');
 	        $total = $reportlist->get();
+            // MyModel::distinct()->get(['column_name']);
             $reports = $reportlist->paginate(1000);
+            // dd($reports);
 
         return view('admin.reportForm',compact('reports','nationality','persontype','sector'))->with('i', (request()->input('page', 1) - 1) * 1000);
 
@@ -603,6 +605,56 @@ class AdminController extends Controller
         );
         // $applicants = VisaApplicationHead::where('status', 0)->latest()->get();
         return Excel::download(new ApplicantsExport($applicants), 'applicants.xlsx');
+    }
+
+
+    // All ApplicantLIst 
+
+    public function AllapplicantList(Request $request){
+        $allapplicants = DB::table('visa_application_details as d')
+        ->join('visa_application_heads', 'd.visa_application_head_id', '=', 'visa_application_heads.id')
+        ->join('nationalities', 'd.nationality_id', '=', 'nationalities.id')
+        ->join('profiles', 'visa_application_heads.profile_id', '=', 'profiles.id')
+        ->join('person_types', 'd.person_type_id', '=', 'person_types.id')
+        ->join('sectors','profiles.sector_id','=','sectors.id')
+        ->leftjoin('relation_ships', 'd.relation_ship_id', '=', 'relation_ships.id')
+        ->leftjoin('visa_types', 'd.visa_type_id', '=', 'visa_types.id')
+        ->leftjoin('stay_types', 'd.stay_type_id', '=', 'stay_types.id')
+        ->select('d.*','nationalities.NationalityName','visa_types.VisaTypeNameMM','stay_types.StayTypeNameMM','person_types.PersonTypeNameMM','relation_ships.RelationShipNameMM','profiles.CompanyName','profiles.PermitNo','visa_application_heads.ApproveDate','sectors.SectorNameMM','profiles.Township','stay_types.id as StayId','profiles.BusinessType')
+        ->whereRaw(DB::raw('d.id in (SELECT max(d.id)
+        from visa_application_details d left join visa_application_heads h on d.visa_application_head_id = h.id
+        where h.Status = 1
+        group by d.PersonName, d.PassportNo)'));
+        
+
+        if (!is_null($request->from_date) || !is_null($request->to_date)) {
+            $allapplicants->whereBetween('visa_application_heads.ApproveDate', [$request->from_date, $request->to_date]);
+        }
+        
+        $aps = $allapplicants->orderBy('PersonName', 'DESC')->paginate(1000);
+        //  $allapplicants = DB::select(
+
+        //         'SELECT *
+        //         from visa_application_details d left join visa_application_heads h on d.visa_application_head_id = h.id 
+        //         left join  `profiles` as p on p.id = h.profile_id
+        //             left join `nationalities` as n on n.id = d.nationality_id 
+        //             left join `person_types` as pt on pt.id = d.person_type_id
+        //             left join `sectors` as s on s.id = p.sector_id
+        //             left join `relation_ships` as rs on rs.id = d.relation_ship_id
+        //             left join `visa_types` as vt on vt.id = d.visa_type_id
+        //             left join `stay_types` as st on st.id = d.stay_type_id
+        //         where d.id in
+        //         (
+        //             select max(d.id)
+        //             from visa_application_details d left join visa_application_heads h on d.visa_application_head_id = h.id
+                    
+        //             where h.Status = 1
+        //             group by d.PersonName, d.PassportNo
+
+        //         )'
+        //     );
+            // dd($allapplicants);
+        return view('admin.allApplicant',compact('aps'));
     }
 
     public function foreignExport($id)
