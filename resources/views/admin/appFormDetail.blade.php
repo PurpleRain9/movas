@@ -425,7 +425,7 @@ p{line-height: 200%; font-size: 17px;}
 								</td>
 								<td >
 									<tr rowspan="2">
-										<th colspan="1" class="bg-white"></th>
+										<th colspan="1" class="fw-light">Form C Address</th>
 										<th colspan="9" class="fw-light text-left bg-white">{{ $vd->FormC }}</th>
 									</tr>
 								</td>
