@@ -631,7 +631,7 @@ class AdminController extends Controller
             $allapplicants->whereBetween('visa_application_heads.ApproveDate', [$request->from_date, $request->to_date]);
         }
         
-        $aps = $allapplicants->orderBy('PersonName', 'DESC')->paginate(1000);
+        $aps = $allapplicants->orderBy('PersonName', 'DESC')->get();//paginate(1000);
         //  $allapplicants = DB::select(
 
         //         'SELECT *

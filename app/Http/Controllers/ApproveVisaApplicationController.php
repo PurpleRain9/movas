@@ -283,21 +283,21 @@ class ApproveVisaApplicationController extends Controller
                         'ApproveDate'=>now(),
                         'ApproveLetterNo'=>$letterNo->letterNo,
                 ]);
-                // $data = array(
-                //             'username' => $visa_head->user->name,
-                //             // 'cmt' => $request->cmt,
-                //             'email' => $visa_head->user->email,
-                //         );
+                $data = array(
+                            'username' => $visa_head->user->name,
+                            // 'cmt' => $request->cmt,
+                            'email' => $visa_head->user->email,
+                        );
 
-                // \Mail::send(
-                //     'admin.visa.approvemail',
-                //     ['data' => $data],
-                //     function ($message) use ($data) {
-                //         $message
-                //             ->from('movasygn@dica.gov.mm', 'MOVAS')
-                //             ->to($data['email'])->subject('Your Visa Application had been approved.');
-                //     }
-                // );
+                \Mail::send(
+                    'admin.visa.approvemail',
+                    ['data' => $data],
+                    function ($message) use ($data) {
+                        $message
+                            ->from('movasygn@dica.gov.mm', 'MOVAS')
+                            ->to($data['email'])->subject('Your Visa Application had been approved.');
+                    }
+                );
 
         Toastr::success('Successfully Approved!');
 
@@ -360,20 +360,20 @@ class ApproveVisaApplicationController extends Controller
             $visa_head->update(['RejectedDate'=>now()]);
             $visa_head->update(['RejectComment'=>$request->Comment]);
     
-            // $data = array(
-            //             'username' => $visa_head->user->name,
-            //             'cmt' => $request->Comment,
-            //             'email' => $visa_head->user->email,
-            //         );
-            // \Mail::send(
-            //     'admin.visa.approvemail',
-            //     ['data' => $data],
-            //     function ($message) use ($data) {
-            //         $message
-            //             ->from('movasygn@dica.gov.mm', 'MOVAS')
-            //             ->to($data['email'])->subject('Your Visa Application had been reject.');
-            //     }
-            // );
+            $data = array(
+                        'username' => $visa_head->user->name,
+                        'cmt' => $request->Comment,
+                        'email' => $visa_head->user->email,
+                    );
+            \Mail::send(
+                'admin.visa.approvemail',
+                ['data' => $data],
+                function ($message) use ($data) {
+                    $message
+                        ->from('movasygn@dica.gov.mm', 'MOVAS')
+                        ->to($data['email'])->subject('Your Visa Application had been reject.');
+                }
+            );
             // \Mail::send(
             //     'admin.visa.rejectmail',
             //     ['data' => $data],

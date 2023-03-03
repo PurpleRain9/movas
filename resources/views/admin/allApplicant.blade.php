@@ -206,9 +206,9 @@
         </div>
         <div class="Container mt-2">
             <div class="" style="margin-left: 500px;">
-                @if (isset($aps))
+                {{-- @if (isset($aps))
                     {{ $aps->links('vendor.pagination.custom') }}
-                @endif
+                @endif --}}
             </div>
         </div>
 

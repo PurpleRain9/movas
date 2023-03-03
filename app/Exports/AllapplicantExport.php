@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class AllapplicantExport implements FromView,ShouldAutoSize,WithEvents
+class AllapplicantExport implements FromView,ShouldAutoSize,WithEvents,WithChunkReading
 {
     protected $report; 
 
@@ -19,6 +20,10 @@ class AllapplicantExport implements FromView,ShouldAutoSize,WithEvents
         $this->report = $report;
         $this->totalRow = $totalRow;
         
+    }
+    public function chunkSize(): int
+    {
+        return 10;
     }
 
     public function array(): array

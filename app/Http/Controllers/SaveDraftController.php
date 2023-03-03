@@ -18,9 +18,12 @@ use DB;
 use Illuminate\Support\Carbon;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Mockery\Matcher\Subset;
+
 class SaveDraftController extends Controller
 {
 
@@ -95,11 +98,13 @@ class SaveDraftController extends Controller
         }
         // check labour card type with controller (double check)
         if($request->labour_card_type_id == 1){
-            
+            $Name = $request->PersonName;
+            $nameDotCatch = explode('.', $Name);
+            $stringName = implode($nameDotCatch);
             $check = DB::table('visa_application_details as ad')
                     ->join('visa_application_heads as ah', 'ah.id', 'ad.visa_application_head_id')
                     ->where('ah.Status', 1)
-                    ->where('ad.PersonName', $request->PersonName)
+                    ->where('ad.PersonName', $stringName)
                     ->where('ad.PassportNo', $request->PassportNo)
                     ->where('ad.labour_card_type_id', '!=', NULL)
                     ->get();
@@ -112,18 +117,25 @@ class SaveDraftController extends Controller
         }
     
         // check stay 2 month after approve with controller (double check)
-        $twoMonthSub = Carbon::now()->subMonths(2);        
+        $twoMonthSub = Carbon::now()->subMonths(2);
+        
+        // dd($stringName);
         if(!is_null($request->stay_type_id)){  
+
+            $Name = $request->PersonName;
+            $nameDotCatch = explode('.', $Name);
+            $stringName = implode($nameDotCatch);
             $check = DB::table('visa_application_details as ad')
                     ->join('visa_application_heads as ah', 'ah.id', 'ad.visa_application_head_id')
                     ->where('ah.Status', 1)
-                    ->where('ad.PersonName', $request->PersonName)
+                    ->where('ad.PersonName', $stringName)
                     ->where('ad.PassportNo', $request->PassportNo)
                     ->where('ah.ApproveDate', '>', $twoMonthSub)
                     ->where('ad.stay_type_id', '!=', NULL)
                     ->get();
                     // dd('check stay 2 month');
             if($check->count() != 0){
+                
                 // dd('something');
                 return redirect('newapplyform')->with('error',$request->PersonName. '  သည် နေထိုင်ခွင့်သက်တမ်းတိုးလျှောက်ထားခြင်းအား ခွင့်ပြုပြီး ၂ လ ပြည့်မှသာ ပြန်လည်လျှောက်ထားခွင့် ရနိုင်ပါမည်။'); 
             }
@@ -131,15 +143,17 @@ class SaveDraftController extends Controller
         
         // check inprocess state
         // dd('checking inprocess');
-        // (! ကို ဖြုတ်ထား သည်  အမှန် က (! is_null(request->PersonName)))
         if (!is_null($request->PersonName) && !is_null($request->PassportNo)) {
             // dd(auth()->user()->id);
+            $Name = $request->PersonName;
+            $nameDotCatch = explode('.', $Name);
+            $stringName = implode($nameDotCatch);
             $visa = VisaApplicationHead::join('visa_application_details', 'visa_application_details.visa_application_head_id', '=', 'visa_application_heads.id')
                     ->where('visa_application_heads.user_id',auth()->user()->id) // solved duplicate error
-                    ->where('visa_application_details.PersonName',$request->PersonName)
+                    ->where('visa_application_details.PersonName',$stringName)
                     ->where('visa_application_details.PassportNo',$request->PassportNo)
-                    ->where('visa_application_heads.status', '!=', 1)
-                    ->where('visa_application_heads.status', '!=', 2)
+                    ->where('visa_application_heads.Status', '!=', 1)
+                    ->where('visa_application_heads.Status', '!=', 2)
                     ->count();
             // dd($visa->get());
             if($visa == 1){
@@ -152,9 +166,12 @@ class SaveDraftController extends Controller
         if( $request->submitButton == 0)
         {
             if (!is_null($request->PersonName) && !is_null($request->PassportNo)) {
+                $Name = $request->PersonName;
+                $nameDotCatch = explode('.', $Name);
+                $stringName = implode($nameDotCatch);
                 $reject = VisaApplicationHead::join('visa_application_details', 'visa_application_details.visa_application_head_id', '=', 'visa_application_heads.id')
                 ->where('visa_application_heads.user_id', auth()->user()->id)
-                ->where('visa_application_details.PersonName',$request->PersonName)
+                ->where('visa_application_details.PersonName',$stringName)
                 ->where('visa_application_details.PassportNo',$request->PassportNo)
                 ->where('visa_application_heads.Status', '=', 2)
                 ->get();
@@ -164,6 +181,8 @@ class SaveDraftController extends Controller
                     return redirect('newapplyform')->with('error',$request->PersonName. '  သည် နေထိုင်ခွင့်သက်တမ်းတိုးလျှောက်ထားခြင်းအား ခွင့် မပြု၍   ပြန်လည်လျှောက်ထားခွင့် မရနိုင်ပါ။'); 
                 }
             }
+            
+
             if (!is_null($request->nationality_id) && !is_null($request->PersonName) && !is_null($request->PassportNo)) {
 
                 if (is_null($request->labour_card_type_id)) {

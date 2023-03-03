@@ -296,7 +296,7 @@
 								</div>
 								<div class="col-md-3">
 									{{-- <a href="{{ URL::to('/public'.$applicant->mic_approved_letter_attach) }}" class="btn btn-primary ">View</a>              --}}
-									<a href="{{ URL::to($applicant->mic_approved_letter_attach) }}" class="btn btn-primary ">View</a>
+									<a href="{{ URL::to('public/'.$applicant->mic_approved_letter_attach) }}" class="btn btn-primary ">View</a>
 								</div>
 							</div>
 						</div>
@@ -307,7 +307,7 @@
 								</div>
 								<div class="col-md-3">
 									{{-- <a href="{{ URL::to('/public'.$applicant->labour_card_attach) }}" class="btn btn-primary ">View</a>   --}}
-									<a href="{{ URL::to($applicant->labour_card_attach) }}" class="btn btn-primary ">View</a>           
+									<a href="{{ URL::to('public/'.$applicant->labour_card_attach) }}" class="btn btn-primary ">View</a>           
 								</div>
 							</div>
 						</div>
@@ -469,9 +469,11 @@
   			// alert( this.value );
 			if (this.value == 'null') {
 				$('#rankInputDiv').hide(500);
+				$("#rank_input").prop('required',false);
 			}
 			if (this.value == 1) {
 				$('#rankInputDiv').hide(500);
+				$("#rank_input").prop('required',false);
 			}
 			if (this.value == 3) {
 				$('#rankInputDiv').show(500);
@@ -479,6 +481,7 @@
 			}
 			if(this.value == 4){
 				$('#rankInputDiv').hide(500);
+				$("#rank_input").prop('required',false);
 			}
 		}).trigger('change');
 		
